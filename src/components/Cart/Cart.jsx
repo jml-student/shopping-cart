@@ -5,7 +5,7 @@ function Cart() {
   const { cartProducts } = useCart()
 
   return (
-    <div className='cart'>
+    <div onClick={(event) => event.stopPropagation()}>
       <h1>Cart</h1>
       <ul>
         {cartProducts.map((product) => {
