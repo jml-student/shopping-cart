@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom'
-import { useSharedData } from './components/SharedData/useSharedData.jsx'
+import { useCart } from './components/SharedData/CartContext.jsx'
 
 export async function shopLoader() {
   const products = []
@@ -12,7 +12,7 @@ export async function shopLoader() {
 }
 
 export default function Root() {
-  const { cartProducts, setCartProducts } = useSharedData()
+  const { cartProducts, setCartProducts } = useCart()
   return (
     <>
       <nav>
