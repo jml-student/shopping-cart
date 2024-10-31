@@ -1,0 +1,8 @@
+.product {
+  border: 1px solid black;
+
+  img {
+    height: auto;
+    width: 100px;
+  }
+}

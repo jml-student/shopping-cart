@@ -1,0 +1,12 @@
+.cart {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100vh;
+  background-color: white;
+  border-left: 1px solid black;
+  padding: 20px;
+}

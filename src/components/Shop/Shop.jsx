@@ -1,5 +1,6 @@
 import { useLoaderData } from 'react-router-dom'
 import { useCart } from '../SharedData/CartContext.jsx'
+import './shop.css'
 
 export default function Shop() {
   const { products } = useLoaderData()

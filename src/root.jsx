@@ -1,5 +1,7 @@
 import { Outlet, Link } from 'react-router-dom'
 import { useCart } from './components/SharedData/CartContext.jsx'
+import Cart from './components/Cart/Cart.jsx'
+import { useState } from 'react'
 
 export async function shopLoader() {
   const products = []
@@ -12,7 +14,8 @@ export async function shopLoader() {
 }
 
 export default function Root() {
-  const { cartProducts, setCartProducts } = useCart()
+  const [showCart, setShowCart] = useState(false)
+  const { cartProducts } = useCart()
   return (
     <>
       <nav>
@@ -26,7 +29,7 @@ export default function Root() {
           <button
             className='btc-cart'
             onClick={() => {
-              setCartProducts((prev) => [...prev, 1])
+              setShowCart(!showCart)
             }}
           >
             <span className='cartNumber'>{cartProducts.length}</span>
@@ -39,6 +42,7 @@ export default function Root() {
       <div id='detail'>
         <Outlet />
       </div>
+      {showCart && <Cart />}
     </>
   )
 }
