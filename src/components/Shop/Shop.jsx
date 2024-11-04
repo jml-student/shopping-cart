@@ -4,7 +4,25 @@ import './shop.css'
 
 export default function Shop() {
   const { products } = useLoaderData()
-  const { setCartProducts } = useCart()
+  const { cartProducts, setCartProducts } = useCart()
+
+  const addToCart = (product) => {
+    const existingProductIndex = cartProducts.findIndex(
+      (cartProduct) => cartProduct.id === product.id
+    )
+
+    if (existingProductIndex !== -1) {
+      const updatedCartProducts = cartProducts.map((cartProduct, index) =>
+        index === existingProductIndex
+          ? { ...cartProduct, quantity: cartProduct.quantity + 1 }
+          : cartProduct
+      )
+      setCartProducts(updatedCartProducts)
+    } else {
+      setCartProducts([...cartProducts, product])
+    }
+  }
+
   return (
     <div>
       {products.map((product) => {
@@ -16,7 +34,7 @@ export default function Shop() {
             <h2>{product.price}</h2>
             <button
               className='btn-add-to-cart'
-              onClick={() => setCartProducts((prev) => [...prev, product])}
+              onClick={() => addToCart(product)}
             >
               Add to cart
             </button>

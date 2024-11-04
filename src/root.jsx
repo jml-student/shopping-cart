@@ -8,6 +8,7 @@ export async function shopLoader() {
   for (let i = 1; i <= 12; i++) {
     const response = await fetch(`https://fakestoreapi.com/products/${i}`)
     const product = await response.json()
+    product.quantity = 1
     products.push(product)
   }
   return { products }
@@ -16,10 +17,15 @@ export async function shopLoader() {
 export default function Root() {
   const [showCart, setShowCart] = useState(false)
   const { cartProducts } = useCart()
+  let cartLength = 0
+
   return (
-    <div className='container' onClick={() => setShowCart(false)}>
+    <div
+      className='container'
+      onClick={showCart ? () => setShowCart(false) : undefined}
+    >
       <div className='header'>
-        <h1 className='title'>Shopping Cart</h1>
+        <h1 className='title'>Shop Name</h1>
         <nav>
           <ul>
             <li>
@@ -35,7 +41,12 @@ export default function Root() {
                 setShowCart(!showCart)
               }}
             >
-              <span className='cartNumber'>{cartProducts.length}</span>
+              <span className='cartNumber'>
+                {cartProducts.map((product) => {
+                  cartLength += product.quantity
+                })}
+                {cartLength}
+              </span>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='currentColor'
@@ -50,7 +61,10 @@ export default function Root() {
       <div id='detail'>
         <Outlet />
       </div>
-      <div className={`cart ${showCart ? 'visible' : ''}`}>
+      <div
+        className={`cart ${showCart ? 'visible' : ''}`}
+        onClick={(event) => event.stopPropagation()}
+      >
         <Cart />
       </div>
     </div>
