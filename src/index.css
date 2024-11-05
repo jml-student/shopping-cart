@@ -1,11 +1,18 @@
+:root {
+  --black: #383838;
+}
+
 *,
 *::before,
 *::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  color: var(--black);
   font-family:
     system-ui,
     -apple-system,
@@ -26,11 +33,17 @@ body {
   align-items: center;
   padding: 10px 20px;
   background-color: rgb(240, 240, 240);
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--black);
 }
 
 .title {
   font-size: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--black);
+  font-weight: 700;
 }
 
 nav {
@@ -51,16 +64,19 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
+  width: 70px;
   height: 30px;
   border-radius: 10px;
   border: none;
   background-color: rgb(21, 179, 0);
   color: white;
+  padding: 5px;
   font-size: 1.2rem;
   cursor: pointer;
 
   svg {
+    width: auto;
+    height: 100%;
     color: white;
   }
 }

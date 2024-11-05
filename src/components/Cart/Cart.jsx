@@ -1,8 +1,9 @@
 import { useCart } from '../SharedData/CartContext.jsx'
+import { Link } from 'react-router-dom'
 import './cart.css'
 
-function Cart() {
-  const { cartProducts, setCartProducts } = useCart()
+export default function Cart() {
+  const { cartProducts, setCartProducts, setShowCart } = useCart()
 
   const removeItem = (id) => {
     const updatedCartProducts = cartProducts
@@ -40,25 +41,46 @@ function Cart() {
               <img src={product.image} alt={product.title} />
               <div className='cart-product-info'>
                 <li>{product.title}</li>
-                <button
-                  onClick={() => removeItem(product.id)}
-                  className='btn-remove'
-                >
-                  -
-                </button>
-                <span>{product.quantity}</span>
-                <button onClick={() => addItem(product.id)} className='btn-add'>
-                  +
-                </button>
-                <span>{product.price * product.quantity}</span>
+                <div className='cart-btn-cont'>
+                  <button
+                    onClick={() => removeItem(product.id)}
+                    className='btn-remove'
+                  >
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <title>minus-circle</title>
+                      <path d='M17,13H7V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z' />
+                    </svg>
+                  </button>
+                  <span>{product.quantity}</span>
+                  <button
+                    onClick={() => addItem(product.id)}
+                    className='btn-add'
+                  >
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <title>plus-circle</title>
+                      <path d='M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z' />
+                    </svg>
+                  </button>
+                  <span className='cart-price'>
+                    $ {product.price * product.quantity}
+                  </span>
+                </div>
               </div>
             </div>
           )
         })}
-        <button className='btn-checkout'>Checkout</button>
+        <button className='btn-checkout' onClick={() => setShowCart(false)}>
+          <Link to={'/checkout'}>Checkout</Link>
+        </button>
       </ul>
     </div>
   )
 }
-
-export default Cart

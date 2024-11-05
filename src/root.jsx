@@ -1,7 +1,6 @@
 import { Outlet, Link } from 'react-router-dom'
 import { useCart } from './components/SharedData/CartContext.jsx'
 import Cart from './components/Cart/Cart.jsx'
-import { useState } from 'react'
 
 export async function shopLoader() {
   const products = []
@@ -15,8 +14,7 @@ export async function shopLoader() {
 }
 
 export default function Root() {
-  const [showCart, setShowCart] = useState(false)
-  const { cartProducts } = useCart()
+  const { cartProducts, showCart, setShowCart } = useCart()
   let cartLength = 0
 
   return (
@@ -25,7 +23,7 @@ export default function Root() {
       onClick={showCart ? () => setShowCart(false) : undefined}
     >
       <div className='header'>
-        <h1 className='title'>Shop Name</h1>
+        <h1 className='title'>Stitch & Style</h1>
         <nav>
           <ul>
             <li>
