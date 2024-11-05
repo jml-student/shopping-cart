@@ -1,5 +1,6 @@
 import { Outlet, Link } from 'react-router-dom'
 import { useCart } from './components/SharedData/CartContext.jsx'
+import { useState, useEffect } from 'react'
 import Cart from './components/Cart/Cart.jsx'
 
 export async function shopLoader() {
@@ -15,14 +16,39 @@ export async function shopLoader() {
 
 export default function Root() {
   const { cartProducts, showCart, setShowCart } = useCart()
+  const [headerVisible, setHeaderVisible] = useState(false)
+  const [lastScrollY, setLastScrollY] = useState(0)
+
   let cartLength = 0
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY === 0) {
+        setHeaderVisible(false)
+      } else if (currentScrollY < lastScrollY) {
+        setHeaderVisible(true)
+      } else {
+        setHeaderVisible(false)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [lastScrollY])
 
   return (
     <div
       className='container'
       onClick={showCart ? () => setShowCart(false) : undefined}
     >
-      <div className='header'>
+      <div className={`header ${headerVisible ? 'visible' : ''}`}>
         <h1 className='title'>Stitch & Style</h1>
         <nav>
           <ul>
