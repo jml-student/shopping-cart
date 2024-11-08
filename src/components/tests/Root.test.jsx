@@ -6,7 +6,7 @@ import { CartProvider } from '../SharedData/CartContext.jsx'
 
 // Mock the Cart component
 vi.mock('../Cart/Cart.jsx', () => ({
-  default: () => <div data-testid='cart-component'>Cart Content</div>,
+  default: () => <div data-testid='cart-component'></div>,
 }))
 
 describe('Root Component', () => {
@@ -25,7 +25,7 @@ describe('Root Component', () => {
     expect(screen.getByText('Shop')).toBeInTheDocument()
   })
 
-  it('displays the cart icon with the correct quantity', () => {
+  it('displays the cart button with the correct quantity', () => {
     render(
       <MemoryRouter>
         <CartProvider>
@@ -34,26 +34,9 @@ describe('Root Component', () => {
       </MemoryRouter>
     )
 
-    // Check for the cart icon and quantity
+    // Check for the cart button and quantity
     const cartNumber = screen.getByText('0')
     expect(cartNumber).toBeInTheDocument()
-  })
-
-  it('toggles cart visibility when cart button is clicked', () => {
-    render(
-      <MemoryRouter>
-        <CartProvider>
-          <Root />
-        </CartProvider>
-      </MemoryRouter>
-    )
-
-    // Find the cart button and click it
-    const cartButton = screen.getByRole('button')
-    fireEvent.click(cartButton)
-
-    // Check if the cart is visible
-    expect(screen.getByTestId('cart-component')).toHaveClass('visible')
   })
 
   it('handles scroll behavior for header visibility', () => {

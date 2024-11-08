@@ -16,7 +16,7 @@ export async function shopLoader() {
 
 export default function Root() {
   const { cartProducts, showCart, setShowCart } = useCart()
-  const [headerVisible, setHeaderVisible] = useState(false)
+  const [headerVisible, setHeaderVisible] = useState('')
   const [lastScrollY, setLastScrollY] = useState(0)
 
   let cartLength = 0
@@ -26,15 +26,16 @@ export default function Root() {
       const currentScrollY = window.scrollY
 
       if (currentScrollY === 0) {
-        setHeaderVisible(false)
+        setHeaderVisible('')
       } else if (currentScrollY < lastScrollY) {
-        setHeaderVisible(true)
-      } else {
-        setHeaderVisible(false)
+        setHeaderVisible('visible')
+      } else if (currentScrollY > lastScrollY) {
+        setHeaderVisible('invisible')
       }
 
       setLastScrollY(currentScrollY)
     }
+    handleScroll()
 
     window.addEventListener('scroll', handleScroll)
 
@@ -48,7 +49,9 @@ export default function Root() {
       className='container'
       onClick={showCart ? () => setShowCart(false) : undefined}
     >
-      <div className={`header ${headerVisible ? 'visible' : ''}`}>
+      <div
+        className={`header ${headerVisible === 'visible' ? 'visible' : headerVisible === 'invisible' ? 'invisible' : ''}`}
+      >
         <h1 className='title'>Stitch & Style</h1>
         <nav>
           <ul>

@@ -32,7 +32,7 @@ export default function Cart() {
     <div>
       <div className='cart-header'>
         <h1>Your Cart</h1>
-        <button className='close-cart'>
+        <button className='close-cart' onClick={() => setShowCart(false)}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='currentColor'
