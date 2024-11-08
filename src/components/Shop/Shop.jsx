@@ -24,14 +24,14 @@ export default function Shop() {
   }
 
   return (
-    <div>
+    <div className='products-container'>
       {products.map((product) => {
         return (
           <div className='product' key={product.id}>
             <img src={product.image} alt={product.title} />
             <h1>{product.title}</h1>
             <p>{product.description}</p>
-            <h2>{product.price}</h2>
+            <h2>${product.price}</h2>
             <button
               className='btn-add-to-cart'
               onClick={() => addToCart(product)}

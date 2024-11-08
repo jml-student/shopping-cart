@@ -5,6 +5,11 @@ import './cart.css'
 export default function Cart() {
   const { cartProducts, setCartProducts, setShowCart } = useCart()
 
+  const totalPrice = () =>
+    cartProducts.reduce((total, product) => {
+      return total + product.price * product.quantity
+    }, 0)
+
   const removeItem = (id) => {
     const updatedCartProducts = cartProducts
       .map((cartProduct) => {
@@ -29,7 +34,7 @@ export default function Cart() {
   }
 
   return (
-    <div>
+    <>
       <div className='cart-header'>
         <h1>Your Cart</h1>
         <button className='close-cart' onClick={() => setShowCart(false)}>
@@ -90,12 +95,15 @@ export default function Cart() {
             )
           })
         )}
-        {cartProducts.length > 0 ? (
+      </ul>
+      {cartProducts.length > 0 ? (
+        <>
+          <div className='total-price'>Total: ${totalPrice().toFixed(2)}</div>
           <button className='btn-checkout' onClick={() => setShowCart(false)}>
             <Link to={'/checkout'}>Checkout</Link>
           </button>
-        ) : undefined}
-      </ul>
-    </div>
+        </>
+      ) : undefined}
+    </>
   )
 }
