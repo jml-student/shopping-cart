@@ -3,17 +3,6 @@ import { useCart } from './components/SharedData/CartContext.jsx'
 import { useState, useEffect } from 'react'
 import Cart from './components/Cart/Cart.jsx'
 
-export async function shopLoader() {
-  const products = []
-  for (let i = 1; i <= 12; i++) {
-    const response = await fetch(`https://fakestoreapi.com/products/${i}`)
-    const product = await response.json()
-    product.quantity = 1
-    products.push(product)
-  }
-  return { products }
-}
-
 export default function Root() {
   const { cartProducts, showCart, setShowCart } = useCart()
   const [headerVisible, setHeaderVisible] = useState('')

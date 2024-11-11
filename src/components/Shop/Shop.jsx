@@ -2,6 +2,17 @@ import { useLoaderData } from 'react-router-dom'
 import { useCart } from '../SharedData/CartContext.jsx'
 import './shop.css'
 
+export async function shopLoader() {
+  const products = []
+  for (let i = 1; i <= 12; i++) {
+    const response = await fetch(`https://fakestoreapi.com/products/${i}`)
+    const product = await response.json()
+    product.quantity = 1
+    products.push(product)
+  }
+  return { products }
+}
+
 export default function Shop() {
   const { products } = useLoaderData()
   const { cartProducts, setCartProducts } = useCart()
