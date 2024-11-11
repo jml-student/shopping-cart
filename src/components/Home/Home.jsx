@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import './home.css'
 
 export default function Home() {
   const [carouselIndex, setCarouselIndex] = useState(0)
@@ -25,7 +26,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCarouselIndex((prevIndex) => {
-        prevIndex === carouselProducts.length - 1 ? 0 : prevIndex + 1
+        return prevIndex === carouselProducts.length - 1 ? 0 : prevIndex + 1
       })
     }, 2000)
     return () => {
@@ -51,24 +52,25 @@ export default function Home() {
       <p>Shop now and get 10% off your order</p>
       <div className='carousel-container'>
         <div className='carousel'>
-          <div className='left-button' onClick={handlePrevious}>
+          <button className='left-button' onClick={handlePrevious}>
             L
-          </div>
+          </button>
           {carouselProducts.length > 0 && (
             <div className='carousel-item'>
-              <img
-                src={carouselProducts[carouselIndex].image}
-                alt={carouselProducts[carouselIndex].title}
-                className='carousel-image'
-              />
+              <div className='carousel-image'>
+                <img
+                  src={carouselProducts[carouselIndex].image}
+                  alt={carouselProducts[carouselIndex].title}
+                />
+              </div>
               <div className='carousel-price'>
                 <h2>${carouselProducts[carouselIndex].price}</h2>
               </div>
             </div>
           )}
-          <div className='right-button' onClick={handleNext}>
+          <button className='right-button' onClick={handleNext}>
             R
-          </div>
+          </button>
         </div>
         <div className='dots'>
           {carouselProducts.map((_, index) => {
