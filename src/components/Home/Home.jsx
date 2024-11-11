@@ -32,7 +32,7 @@ export default function Home() {
     return () => {
       clearInterval(interval)
     }
-  }, [carouselProducts])
+  }, [carouselProducts, carouselIndex])
 
   const handlePrevious = () => {
     setCarouselIndex((prevIndex) =>
@@ -41,9 +41,9 @@ export default function Home() {
   }
 
   const handleNext = () => {
-    setCarouselIndex((prevIndex) => {
+    setCarouselIndex((prevIndex) =>
       prevIndex === carouselProducts.length - 1 ? 0 : prevIndex + 1
-    })
+    )
   }
 
   return (
@@ -53,7 +53,14 @@ export default function Home() {
       <div className='carousel-container'>
         <div className='carousel'>
           <button className='left-button' onClick={handlePrevious}>
-            L
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <title>chevron-left</title>
+              <path d='M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z' />
+            </svg>
           </button>
           {carouselProducts.length > 0 && (
             <div className='carousel-item'>
@@ -69,7 +76,14 @@ export default function Home() {
             </div>
           )}
           <button className='right-button' onClick={handleNext}>
-            R
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <title>chevron-right</title>
+              <path d='M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z' />
+            </svg>
           </button>
         </div>
         <div className='dots'>
@@ -80,7 +94,13 @@ export default function Home() {
                 onClick={() => setCarouselIndex(index)}
                 key={index}
               >
-                o
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path d='M12,10A2,2 0 0,0 10,12C10,13.11 10.9,14 12,14C13.11,14 14,13.11 14,12A2,2 0 0,0 12,10Z' />
+                </svg>
               </span>
             )
           })}
