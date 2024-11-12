@@ -1,8 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { BrowserRouter } from 'react-router-dom'
 import { useCart } from '../SharedData/CartContext.jsx'
-import { beforeEach, afterEach } from 'vitest'
 import Cart from '../Cart/Cart.jsx'
 
 vi.mock('../SharedData/CartContext.jsx')
@@ -51,7 +50,7 @@ describe('Cart Component', () => {
     expect(screen.getByText('Your Cart')).toBeInTheDocument()
     expect(screen.getByText('Product 1')).toBeInTheDocument()
     expect(screen.getByText('Product 2')).toBeInTheDocument()
-    expect(screen.getByText('$ 30')).toBeInTheDocument() // Product 1 total price (10 * 2)
+    expect(screen.getByText('$ 30')).toBeInTheDocument() // Product 1 total price (10 * 3)
     expect(screen.getByText('$ 20')).toBeInTheDocument() // Product 2 total price
     expect(screen.getByText('Total: $50.00')).toBeInTheDocument() // Total price of all products
   })
